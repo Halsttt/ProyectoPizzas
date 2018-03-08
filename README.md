@@ -1,4 +1,4 @@
 # ProyectoPizzas
 Proyecto hecho en Java y CouchBase.
 
-Por hacer: buscar como hacer update.
+Por hacer: buscar como hacer updates.
