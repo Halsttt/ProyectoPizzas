@@ -1,7 +1,8 @@
 package pizzeria.pizzeria;
 
+import java.sql.Time;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
@@ -12,7 +13,6 @@ import com.couchbase.client.java.document.JsonDocument;
 import com.couchbase.client.java.document.json.JsonObject;
 import com.couchbase.client.java.query.N1qlParams;
 import com.couchbase.client.java.query.N1qlQuery;
-import com.couchbase.client.java.query.N1qlQueryResult;
 import com.couchbase.client.java.query.N1qlQueryRow;
 
 public class Pedido {
@@ -36,8 +36,6 @@ public class Pedido {
 	            System.out.println(row);
 	        }
 	        
-	    JsonDocument count = bucketPedidos.get("id");
-	        
 	    //Keyboard ATR
 	    Scanner scanner = new Scanner(System.in);
 	  	System.out.println("Por favor, introduce la Pizza que quieres:");
@@ -46,20 +44,34 @@ public class Pedido {
 		System.out.println("Cuantas :"+pizzaPedida+" quiere?");
 		int numPedida = scanner.nextInt();
 		
-		int number = 0;
-		int resultNumber = number++;
+		Number n = new Number();
+		System.out.println(n);
+		String nString = String.valueOf(n);
 		
-		//INSERT SOON
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate time = LocalDate.now();
+		 
+		String timeString = String.valueOf(time);
+		
+		int hr=Time.valueOf(LocalTime.now()).getHours();
+		int minutes=Time.valueOf(LocalTime.now()).getMinutes();
+		
+		//CHECKING IF NAME AND PASSWORD != NULL / EMPTY
+        if (pizzaPedida.equals("") && pizzaPedida == null || numPedida == 0) {
+        	System.out.println("Error: La pizza no puede ser null o el numero 0.");
+        } else {
+		//INSERT DEMAND
 		JsonObject pedido = JsonObject.create()
-				.put("id", resultNumber)
+				.put("id", nString)
         		.put("name", pizzaPedida)
-        		//.put("fecha", times)
-        		//.put("Hora", hora + min)
+        		.put("fecha", timeString)
+        		.put("Hora", hr+":"+minutes)
         		.put("num", numPedida);
         		
-        		
-        
-		bucketPedidos.upsert(JsonDocument.create("pedido::"+pizzaPedida, pedido));
-	        
+		bucketPedidos.upsert(JsonDocument.create(nString+"::"+pizzaPedida, pedido));
+		System.out.println("Pedido Creado Correctamente!");
+        }
+        Boolean closed = bucketPizzas.close();
+		Boolean closedd = bucketPedidos.close();
 	}
 }

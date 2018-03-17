@@ -6,7 +6,6 @@ import com.couchbase.client.java.Bucket;
 import com.couchbase.client.java.Cluster;
 import com.couchbase.client.java.CouchbaseCluster;
 import com.couchbase.client.java.document.JsonDocument;
-import com.couchbase.client.java.document.json.JsonObject;
 
 public class Login {
 
@@ -53,6 +52,8 @@ public class Login {
         		System.out.println("Incorrect Password!");
         	}
         }
+        
+        Boolean closed = bucket.close();
 		
         
 		
