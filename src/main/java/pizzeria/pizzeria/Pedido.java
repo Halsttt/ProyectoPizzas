@@ -41,7 +41,7 @@ public class Pedido {
 	  	System.out.println("Por favor, introduce la Pizza que quieres:");
 		String pizzaPedida = scanner.next();
 		
-		System.out.println("Cuantas :"+pizzaPedida+" quiere?");
+		System.out.println("Cuantas "+pizzaPedida+" quiere?");
 		int numPedida = scanner.nextInt();
 		
 		Number n = new Number();

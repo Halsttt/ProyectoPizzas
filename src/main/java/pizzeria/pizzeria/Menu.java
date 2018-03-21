@@ -63,6 +63,7 @@ public class Menu {
                     case 6:
                         salir = true;
                         
+                        
                         break;
                     default:
                         System.out.println("Sólo números entre 1 y 6, por favor.");

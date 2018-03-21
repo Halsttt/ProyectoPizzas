@@ -28,11 +28,18 @@ public class Login {
         JsonDocument nameDoc = bucket.get("user::"+name);
         
         
-        System.out.println(nameDoc.content().getString("name"));
-        System.out.println(nameDoc.content().getString("password"));
-        String passwordUser = nameDoc.content().getString("password");
-        System.out.println(name);
-        System.out.println(password);
+        //System.out.println(nameDoc.content().getString("name"));
+        //System.out.println(nameDoc.content().getString("password"));
+        String passwordUser = null;
+        try {
+        if(nameDoc.content().getString("password") != null) {
+        passwordUser = nameDoc.content().getString("password");
+        }
+        } catch(Exception e) {
+        	System.out.println(e);
+        }
+        //System.out.println(name);
+        //System.out.println(password);
         
         //CHECKING IF NAME AND PASSWORD != NULL / EMPTY
         if (name.equals("") && name == null || password.equals("") && password == null) {

@@ -40,7 +40,8 @@ public class Registro {
         							.put("name", name)
         							.put("password", password);
             
-        			//System.out.println(bucket.upsert(JsonDocument.create("user::"+name, usu)));
+        			System.out.println(bucket.upsert(JsonDocument.create("user::"+name, usu)));
+        			bucket.upsert(JsonDocument.create("user::"+name, usu));
         			System.out.println("Usuario Creado correctamente!");
         		} else {
         			System.out.println("Este Usuario ya esta creado, intentalo de nuevo con otro nombre");
